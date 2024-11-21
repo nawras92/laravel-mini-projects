@@ -1,30 +1,33 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\QuotesController;
 
 //*** QUotes
-Route::get('/quotes', function () {
-  require 'data/quotes.php';
-  $output = '<div>';
-  $output .= '<h1>Quotes website</h1>';
-  $output .= '<hr>';
-  $output .= '<ul>';
-  foreach ($quotes as $quote) {
-    $output .= '<li>';
-    $output .= '<a href="' . 'quotes/' . $quote['id'] . '">';
-    $output .= $quote['quote'];
-    $output .= '  - ';
-    $output .= '<span style="color: gray">';
-    $output .= $quote['author'];
-    $output .= '</span>';
-    $output .= '</a>';
-    $output .= '</li>';
-  }
-  $output .= '</ul>';
+Route::get('/quotes', [QuotesController::class, 'showAll']);
+Route::get('/random', [QuotesController::class, 'randomQuote']);
+/* Route::get('/quotes', function () { */
+/*   require 'data/quotes.php'; */
+/*   $output = '<div>'; */
+/*   $output .= '<h1>Quotes website</h1>'; */
+/*   $output .= '<hr>'; */
+/*   $output .= '<ul>'; */
+/*   foreach ($quotes as $quote) { */
+/*     $output .= '<li>'; */
+/*     $output .= '<a href="' . 'quotes/' . $quote['id'] . '">'; */
+/*     $output .= $quote['quote']; */
+/*     $output .= '  - '; */
+/*     $output .= '<span style="color: gray">'; */
+/*     $output .= $quote['author']; */
+/*     $output .= '</span>'; */
+/*     $output .= '</a>'; */
+/*     $output .= '</li>'; */
+/*   } */
+/*   $output .= '</ul>'; */
 
-  $output .= '</div>';
-  return $output;
-});
+/*   $output .= '</div>'; */
+/*   return $output; */
+/* }); */
 
 //** Single Quote
 Route::get('/quotes/{quoteId}', function ($quoteId) {
