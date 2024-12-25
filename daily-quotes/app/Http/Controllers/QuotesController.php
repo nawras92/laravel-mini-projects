@@ -8,7 +8,9 @@ class QuotesController extends Controller
 {
   public function showAll()
   {
-    return 'all quotes';
+    /* return 'all quotes'; */
+    require 'data/quotes.php';
+    return view('quotes', ['quotes' => $quotes]);
   }
 
   public function randomQuote()
