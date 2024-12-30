@@ -27,6 +27,11 @@
 
 <body>
     <h1>Quotes</h1>
+    <p>
+        <a href="/random"> Get a random Quote</a>
+
+    </p>
+
     <table>
         <thead>
             <tr>
@@ -38,7 +43,7 @@
         </thead>
         @foreach ($quotes as $quote)
             <tr>
-                <td>{{ $quote['id'] }}</td>
+                <td><a href="/quotes/{{ $quote['id'] }}">{{ $quote['id'] }}</a></td>
                 <td>{{ $quote['quote'] }} </td>
                 <td> {{ $quote['author'] }} </td>
             </tr>
