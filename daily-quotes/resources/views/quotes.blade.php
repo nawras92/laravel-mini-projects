@@ -1,31 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts.main')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> ALl Quotes</title>
-    <style>
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-
-        table,
-        th,
-        td {
-            border: 1px solid #ccc;
-        }
-
-        th,
-        td {
-            padding: 10px
-        }
-    </style>
-</head>
-
-<body>
+@section('title', 'Home Page')
+@section('content')
     <h1>Quotes</h1>
     <p>
         <a href="/random"> Get a random Quote</a>
@@ -49,7 +25,4 @@
             </tr>
         @endforeach
     </table>
-
-</body>
-
-</html>
+@endsection
