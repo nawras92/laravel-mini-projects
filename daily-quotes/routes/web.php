@@ -4,9 +4,11 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\QuotesController;
 
 //*** QUotes
-Route::get('/quotes', [QuotesController::class, 'showAll']);
+Route::get('/quotes', [QuotesController::class, 'index']);
+Route::get('/quotes/create', [QuotesController::class, 'create']);
 //** Single Quote
-Route::get('/quotes/{quoteId}', [QuotesController::class, 'getOne']);
+Route::get('/quotes/{quoteId}', [QuotesController::class, 'show']);
+Route::post('/quotes', [QuotesController::class, 'store']);
 Route::get('/random', [QuotesController::class, 'randomQuote']);
 /* Route::get('/quotes', function () { */
 /*   require 'data/quotes.php'; */
@@ -56,14 +58,14 @@ Route::get('/random', [QuotesController::class, 'randomQuote']);
 /* }); */
 
 //**  Add Quote
-Route::post('/quotes', function () {
-  return response()->json(
-    [
-      'data' => 'added',
-    ],
-    200,
-  );
-});
+/* Route::post('/quotes', function () { */
+/*   return response()->json( */
+/*     [ */
+/*       'data' => 'added', */
+/*     ], */
+/*     200, */
+/*   ); */
+/* }); */
 
 Route::delete('/quotes/{quoteId}', function ($quoteId) {
   return response()->json(

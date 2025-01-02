@@ -7,14 +7,14 @@ use Illuminate\Http\Request;
 class QuotesController extends Controller
 {
   // Get all quotes
-  public function showAll()
+  public function index()
   {
     /* return 'all quotes'; */
     require 'data/quotes.php';
     return view('quotes', ['quotes' => $quotes]);
   }
   // Get single quote
-  public function getOne($quoteId)
+  public function show($quoteId)
   {
     /* return 'all quotes'; */
     require 'data/quotes.php';
@@ -38,5 +38,16 @@ class QuotesController extends Controller
     $randomQuote = $quotes[$randomKey];
 
     return view('single-quote', ['singleQuote' => $randomQuote]);
+  }
+
+  // Create Quote Form
+  public function create()
+  {
+    return view('create');
+  }
+  //Store quote in the db
+  public function store(Request $request)
+  {
+    dd($request->input('quote-text'), $request->input('quote-author'));
   }
 }
