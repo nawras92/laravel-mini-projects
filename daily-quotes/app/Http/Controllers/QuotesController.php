@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Quotes;
 use Illuminate\Http\Request;
 
 class QuotesController extends Controller
@@ -48,6 +49,30 @@ class QuotesController extends Controller
   //Store quote in the db
   public function store(Request $request)
   {
-    dd($request->input('quote-text'), $request->input('quote-author'));
+    /* dd($request->input('quote-text'), $request->input('quote-author')); */
+    $request->validate(
+      [
+        'quote-text' => 'required|string|max:500',
+        'quote-author' => 'required|string|max:150',
+      ],
+      [
+        'quote-text.required' =>
+          'The quote text is required and cannot be empty.',
+        'quote-text.string' => 'The quote text must be a valid string',
+        'quote-text.max' => 'The quote text cannot be longer than 500 chars.',
+        'quote-author.max' =>
+          'The quote author cannot be longer than 150 chars.',
+      ],
+    );
+
+    //insert into
+    Quotes::create([
+      'quote' => $request->input('quote-text'),
+      'author' => $request->input('quote-author'),
+    ]);
+
+    return redirect()
+      ->back()
+      ->with('success', 'Quote Saved Successfully!');
   }
 }
