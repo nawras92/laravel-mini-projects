@@ -11,21 +11,24 @@ class QuotesController extends Controller
   public function index()
   {
     /* return 'all quotes'; */
-    require 'data/quotes.php';
+    /* require 'data/quotes.php'; */
+    /* $quotes = Quotes::all(); */
+    $quotes = Quotes::orderBy('updated_at', 'desc')->get();
     return view('quotes', ['quotes' => $quotes]);
   }
   // Get single quote
   public function show($quoteId)
   {
+    $singleQuote = Quotes::find($quoteId);
     /* return 'all quotes'; */
-    require 'data/quotes.php';
-    $singleQuote = null;
-    foreach ($quotes as $quote) {
-      if ($quote['id'] == $quoteId) {
-        $singleQuote = $quote;
-        break;
-      }
-    }
+    /* require 'data/quotes.php'; */
+    /* $singleQuote = null; */
+    /* foreach ($quotes as $quote) { */
+    /*   if ($quote['id'] == $quoteId) { */
+    /*     $singleQuote = $quote; */
+    /*     break; */
+    /*   } */
+    /* } */
     if (!$singleQuote) {
       abort(404);
     }
@@ -34,9 +37,11 @@ class QuotesController extends Controller
 
   public function randomQuote()
   {
-    require 'data/quotes.php';
-    $randomKey = array_rand($quotes);
-    $randomQuote = $quotes[$randomKey];
+    /* require 'data/quotes.php'; */
+    /* $randomKey = array_rand($quotes); */
+    /* $randomQuote = $quotes[$randomKey]; */
+    /* $randomQuote = Quotes::inRandomOrder()->first(); */
+    $randomQuote = Quotes::getRandomQuote();
 
     return view('single-quote', ['singleQuote' => $randomQuote]);
   }
