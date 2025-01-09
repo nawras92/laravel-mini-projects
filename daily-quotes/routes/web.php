@@ -10,6 +10,11 @@ Route::get('/quotes/create', [QuotesController::class, 'create']);
 Route::get('/quotes/{quoteId}', [QuotesController::class, 'show']);
 Route::post('/quotes', [QuotesController::class, 'store']);
 Route::get('/random', [QuotesController::class, 'randomQuote']);
+// Edit Route
+Route::get('/quotes/{quoteId}/edit', [QuotesController::class, 'edit']);
+Route::put('/quotes/{quoteId}', [QuotesController::class, 'update']);
+// Delete Route
+/* Route::delete('/quotes/{quoteId}', [QuotesController::class, 'destroy']); */
 /* Route::get('/quotes', function () { */
 /*   require 'data/quotes.php'; */
 /*   $output = '<div>'; */
@@ -67,24 +72,24 @@ Route::get('/random', [QuotesController::class, 'randomQuote']);
 /*   ); */
 /* }); */
 
-Route::delete('/quotes/{quoteId}', function ($quoteId) {
-  return response()->json(
-    [
-      'data' => 'deleted',
-      'id' => $quoteId,
-    ],
-    200,
-  );
-});
-Route::put('/quotes/{quoteId}', function ($quoteId) {
-  return response()->json(
-    [
-      'data' => 'edited',
-      'id' => $quoteId,
-    ],
-    200,
-  );
-});
+/* Route::delete('/quotes/{quoteId}', function ($quoteId) { */
+/*   return response()->json( */
+/*     [ */
+/*       'data' => 'deleted', */
+/*       'id' => $quoteId, */
+/*     ], */
+/*     200, */
+/*   ); */
+/* }); */
+/* Route::put('/quotes/{quoteId}', function ($quoteId) { */
+/*   return response()->json( */
+/*     [ */
+/*       'data' => 'edited', */
+/*       'id' => $quoteId, */
+/*     ], */
+/*     200, */
+/*   ); */
+/* }); */
 
 Route::get('/', function () {
   return view('welcome');

@@ -80,4 +80,48 @@ class QuotesController extends Controller
       ->back()
       ->with('success', 'Quote Saved Successfully!');
   }
+  // Edit Form
+  public function edit($quoteId)
+  {
+    $quote = Quotes::find($quoteId);
+    if (!$quote) {
+      abort(404);
+    }
+    return view('edit', ['quote' => $quote]);
+  }
+  // Update process
+  public function update(Request $request, $quoteId)
+  {
+    /* dd($request->input('quote-text'), $request->input('quote-author')); */
+    $validated = $request->validate(
+      [
+        'quote-text' => 'required|string|max:500',
+        'quote-author' => 'required|string|max:150',
+      ],
+      [
+        'quote-text.required' =>
+          'The quote text is required and cannot be empty.',
+        'quote-text.string' => 'The quote text must be a valid string',
+        'quote-text.max' => 'The quote text cannot be longer than 500 chars.',
+        'quote-author.max' =>
+          'The quote author cannot be longer than 150 chars.',
+      ],
+    );
+
+    // Find Quote
+    $quote = Quotes::find($quoteId);
+    if (!$quote) {
+      return redirect()
+        ->back()
+        ->withErrors('quote_id', 'Quote not found');
+    }
+
+    $quote->quote = $validated['quote-text'];
+    $quote->author = $validated['quote-author'];
+    $quote->save();
+
+    return redirect()
+      ->to('/quotes/' . $quoteId . '/edit')
+      ->with('success', 'Quote Updated Successfully!');
+  }
 }
