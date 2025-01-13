@@ -109,11 +109,12 @@ class QuotesController extends Controller
     );
 
     // Find Quote
+    /* $quoteId = 500; */
     $quote = Quotes::find($quoteId);
     if (!$quote) {
       return redirect()
         ->back()
-        ->withErrors('quote_id', 'Quote not found');
+        ->withErrors(['quote_id' => 'Quote not found']);
     }
 
     $quote->quote = $validated['quote-text'];
@@ -123,5 +124,21 @@ class QuotesController extends Controller
     return redirect()
       ->to('/quotes/' . $quoteId . '/edit')
       ->with('success', 'Quote Updated Successfully!');
+  }
+  // Destroy/ delete quote
+  public function destroy($quoteId)
+  {
+    $quote = Quotes::find($quoteId);
+    if (!$quote) {
+      return redirect()
+        ->back()
+        ->withErrors(['quote_id' => 'Quote not found']);
+    }
+
+    $quote->delete();
+
+    return redirect()
+      ->to('/quotes/')
+      ->with('success', 'Quote Deleted Successfully!');
   }
 }

@@ -14,7 +14,7 @@ Route::get('/random', [QuotesController::class, 'randomQuote']);
 Route::get('/quotes/{quoteId}/edit', [QuotesController::class, 'edit']);
 Route::put('/quotes/{quoteId}', [QuotesController::class, 'update']);
 // Delete Route
-/* Route::delete('/quotes/{quoteId}', [QuotesController::class, 'destroy']); */
+Route::delete('/quotes/{quoteId}', [QuotesController::class, 'destroy']);
 /* Route::get('/quotes', function () { */
 /*   require 'data/quotes.php'; */
 /*   $output = '<div>'; */

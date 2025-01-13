@@ -21,11 +21,11 @@
         </thead>
         @foreach ($quotes as $quote)
             <tr>
-                <td><a href="/quotes/{{ $quote['id'] }}">{{ $quote['id'] }}</a></td>
-                <td>{{ $quote['quote'] }} </td>
+                <td><a href="/quotes/{{ $quote->id }}">{{ $quote->id }}</a></td>
+                <td>{{ $quote->quote }} </td>
                 <td> {{ $quote['author'] }} </td>
                 <td><a href="/quotes/{{ $quote['id'] }}/edit">Edit</a></td>
-                <td><a href="/quotes/{{ $quote['id'] }}/delete">X</a></td>
+                <td>@include('delete')</td>
             </tr>
         @endforeach
     </table>
