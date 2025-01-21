@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\QuotesController;
 
@@ -15,6 +16,25 @@ Route::get('/quotes/{quoteId}/edit', [QuotesController::class, 'edit']);
 Route::put('/quotes/{quoteId}', [QuotesController::class, 'update']);
 // Delete Route
 Route::delete('/quotes/{quoteId}', [QuotesController::class, 'destroy']);
+
+// Auth
+Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
+Route::get('/register', [AuthController::class, 'showRegisterForm'])->name(
+  'register',
+);
+Route::post('/register', [AuthController::class, 'register'])->name(
+  'register.submit',
+);
+Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+
+// Dashboard
+Route::get('/dashboard', function () {
+  return view('auth.dashboard');
+})
+  ->name('dashboard')
+  ->middleware('auth');
+
 /* Route::get('/quotes', function () { */
 /*   require 'data/quotes.php'; */
 /*   $output = '<div>'; */
