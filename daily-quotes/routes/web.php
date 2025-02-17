@@ -12,10 +12,19 @@ Route::get('/quotes/{quoteId}', [QuotesController::class, 'show']);
 Route::post('/quotes', [QuotesController::class, 'store']);
 Route::get('/random', [QuotesController::class, 'randomQuote']);
 // Edit Route
-Route::get('/quotes/{quoteId}/edit', [QuotesController::class, 'edit']);
-Route::put('/quotes/{quoteId}', [QuotesController::class, 'update']);
+Route::get('/quotes/{quoteId}/edit', [
+  QuotesController::class,
+  'edit',
+])->middleware('auth');
+Route::put('/quotes/{quoteId}', [
+  QuotesController::class,
+  'update',
+])->middleware('auth');
 // Delete Route
-Route::delete('/quotes/{quoteId}', [QuotesController::class, 'destroy']);
+Route::delete('/quotes/{quoteId}', [
+  QuotesController::class,
+  'destroy',
+])->middleware('auth');
 
 // Auth
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');

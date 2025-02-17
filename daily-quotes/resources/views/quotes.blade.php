@@ -14,8 +14,10 @@
                 <th>ID</th>
                 <th>Quote</th>
                 <th>Author</th>
-                <th>Edit</th>
-                <th>Delete</th>
+                @auth
+                    <th>Edit</th>
+                    <th>Delete</th>
+                @endauth
             </tr>
 
         </thead>
@@ -24,8 +26,10 @@
                 <td><a href="/quotes/{{ $quote->id }}">{{ $quote->id }}</a></td>
                 <td>{{ $quote->quote }} </td>
                 <td> {{ $quote['author'] }} </td>
-                <td><a href="/quotes/{{ $quote['id'] }}/edit">Edit</a></td>
-                <td>@include('delete')</td>
+                @auth
+                    <td><a href="/quotes/{{ $quote['id'] }}/edit">Edit</a></td>
+                    <td>@include('delete')</td>
+                @endauth
             </tr>
         @endforeach
     </table>
