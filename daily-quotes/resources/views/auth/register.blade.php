@@ -2,27 +2,31 @@
 
 @section('title', 'Create Account')
 @section('content')
-    <h1>Register Form</h1>
-    <form action="{{ route('register.submit') }}" method="POST">
+    @include('partials.page-header', [
+        'pageTitle' => 'Register Form',
+        'pageDesc' => 'Sign up with our team',
+    ])
+    <form class="form" action="{{ route('register.submit') }}" method="POST">
         @csrf
-        <div>
-            <label for="name">Name</label>
-            <input type="name" id="name" name="name" value="{{ old('name') }}" />
+        <div class="form-group">
+            <label class="label" for="name">Name</label>
+            <input class="input" type="name" id="name" name="name" value="{{ old('name') }}" />
         </div>
-        <div>
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" value="{{ old('email') }}" />
+        <div class="form-group">
+            <label class="label" for="email">Email</label>
+            <input class="input" type="email" id="email" name="email" value="{{ old('email') }}" />
         </div>
-        <div>
-            <label for="password">Password</label>
-            <input id="password" name="password" value="{{ old('password') }}" />
+        <div class="form-group">
+            <label class="label" for="password">Password</label>
+            <input class="input" type="password" id="password" name="password" value="{{ old('password') }}" />
         </div>
-        <div>
-            <label for="password_confirmation">Confirm Password</label>
-            <input id="password_confirmation" name="password_confirmation" value="{{ old('password_confirmation') }}" />
+        <div class="form-group">
+            <label class="label" for="password_confirmation">Confirm Password</label>
+            <input class="input" type="password" id="password_confirmation" name="password_confirmation"
+                value="{{ old('password_confirmation') }}" />
         </div>
-        <div>
-            <button type="submit">Register</button>
+        <div class="form-group">
+            <button class="button button-submit" type="submit">Register</button>
         </div>
 
     </form>

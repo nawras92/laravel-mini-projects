@@ -10,10 +10,8 @@
 
 <body>
     @include('partials.header')
-    @include('partials.alerts')
     @yield('content')
 
-    @include('partials.footer')
     <script src="{{ asset('js/quotes.js') }}"></script>
 </body>
 

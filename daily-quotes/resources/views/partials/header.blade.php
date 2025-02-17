@@ -1,16 +1,23 @@
-    <header>
-        <nav>
-            <li><a href="/quotes">Quotes</a></li>
-            <li><a href="/quotes/create">Add new</a></li>
-            <li><a href="/random">Random Quote</a></li>
-            <li><a href="/about">About</a></li>
+<header class="header">
+    <nav class="header-nav nav">
+        <div class="nav-section section">
+            <a class="link nav-link" href="/quotes">Quotes</a>
+            <a class="link nav-link" href="/random">Random Quote</a>
+            <a class="link nav-link" href="/about">About</a>
             @auth
-                <li><a href="{{ route('dashboard') }}">Dashboard</a></li>
-                <li><a href="{{ route('logout') }}">Logout</a></li>
-            @else
-                <li><a href="{{ route('login') }}">Login</a></li>
-                <li><a href="{{ route('register') }}">Register</a></li>
+                <a class="link nav-link" href="/quotes/create">Add new</a>
             @endauth
-        </nav>
+        </div>
+        <div class="nav-section section">
+            @auth
+                <a class="link nav-link" href="{{ route('dashboard') }}">Dashboard</a>
+                <a class="link nav-link" href="{{ route('logout') }}">Logout</a>
+            @else
+                <a class="link nav-link" href="{{ route('login') }}">Login</a>
+                <a class="link nav-link" href="{{ route('register') }}">Register</a>
+            @endauth
 
-    </header>
+        </div>
+    </nav>
+
+</header>

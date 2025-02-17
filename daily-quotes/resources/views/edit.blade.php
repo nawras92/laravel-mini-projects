@@ -2,36 +2,24 @@
 
 @section('title', 'edit quote')
 @section('content')
-    <h1>Edit Quote</h1>
+    @include('partials.page-header', [
+        'pageTitle' => 'Edit Quote',
+        'pageDesc' => 'Here you can edit your quote',
+    ])
 
-    {{-- @if ($errors->any()) --}}
-    {{--     <div class="alert alert-danger"> --}}
-    {{--         <ul> --}}
-    {{--             @foreach ($errors->all() as $error) --}}
-    {{--                 <li>{{ $error }}</li> --}}
-    {{--             @endforeach --}}
-    {{--         </ul> --}}
-    {{--     </div> --}}
-    {{-- @endif --}}
-    {{-- @if (session('success')) --}}
-    {{--     <div class="alert alert-success"> --}}
-    {{--         {{ session('success') }} --}}
-    {{--     </div> --}}
-    {{-- @endif --}}
-
-    <form action="/quotes/{{ $quote->id }}" method="POST">
+    <form class="form" action="/quotes/{{ $quote->id }}" method="POST">
         @csrf
         @method('PUT')
-        <div>
-            <label for="quote-text">Quote Text</label>
-            <textarea id="quote-text" name="quote-text" cols="30" rows="10">{{ $quote->quote }}</textarea>
+        <div class="form-group">
+            <label class="label" for="quote-text">Quote Text</label>
+            <textarea class="textarea " id="quote-text" name="quote-text" cols="30" rows="10">{{ $quote->quote }}</textarea>
         </div>
-        <div>
-            <label for="quote-author">Quote Author</label>
-            <input id="quote-author" name="quote-author" value="{{ $quote->author }}" />
+        <div class="form-group">
+            <label class="label" for="quote-author">Quote Author</label>
+            <input class="input" id="quote-author" name="quote-author" value="{{ $quote->author }}" />
         </div>
-        <div>
-            <button type="submit">Update Quote</button>
+        <div class="form-group">
+            <button class="button button-submit" type="submit">Update Quote</button>
         </div>
 
     </form>

@@ -2,35 +2,30 @@
 
 @section('title', 'Home Page')
 @section('content')
-    <h1>Quotes</h1>
-    <p>
-        <a href="/random"> Get a random Quote</a>
+    @include('partials.page-header', [
+        'pageTitle' => 'Quotes',
+        'pageDesc' => 'Here you are your fav quotes. Get inspired!',
+    ])
 
-    </p>
+    <div class="container">
+        <div class="inner-container">
+            <div class="cards">
+                @foreach ($quotes as $quote)
+                    <div class="card">
+                        <div class="card-body">{{ $quote->quote }} </div>
+                        <div class="card-meta"> {{ $quote['author'] }}</div>
+                        <div class="card-actions">
+                            <a class="button button-view" href="/quotes/{{ $quote->id }}">View</a>
+                            @auth
+                                <a class="button button-edit" href="/quotes/{{ $quote['id'] }}/edit">Edit</a>
+                                @include('delete')
+                            @endauth
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    </div>
+    </div>
 
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Quote</th>
-                <th>Author</th>
-                @auth
-                    <th>Edit</th>
-                    <th>Delete</th>
-                @endauth
-            </tr>
-
-        </thead>
-        @foreach ($quotes as $quote)
-            <tr>
-                <td><a href="/quotes/{{ $quote->id }}">{{ $quote->id }}</a></td>
-                <td>{{ $quote->quote }} </td>
-                <td> {{ $quote['author'] }} </td>
-                @auth
-                    <td><a href="/quotes/{{ $quote['id'] }}/edit">Edit</a></td>
-                    <td>@include('delete')</td>
-                @endauth
-            </tr>
-        @endforeach
-    </table>
 @endsection

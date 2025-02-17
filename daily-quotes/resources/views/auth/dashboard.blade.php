@@ -2,8 +2,8 @@
 
 @section('title', 'Dashboard')
 @section('content')
-    <h1>Dashboard, welcome, {{ auth()->user()->name }}</h1>
-    <p>You are logged In</p>
-    <a href="{{ route('logout') }}">Logout</a>
-
+    @include('partials.page-header', [
+        'pageTitle' => 'Welcome ' . auth()->user()->name,
+        'pageDesc' => 'You are logged In!',
+    ])
 @endsection

@@ -9,7 +9,9 @@
 @section('title', $first3Words)
 
 @section('content')
-    <h1>#{{ $singleQuote['id'] }} - {{ $singleQuote['quote'] }}</h1>
-    <p> {{ $singleQuote['author'] }}</p>
-    <p> <a href="/quotes">Go back to quotes</a></p>
+    @include('partials.page-header', [
+        'pageTitle' => $singleQuote['quote'],
+        'pageDesc' => $singleQuote['author'],
+    ])
+
 @endsection

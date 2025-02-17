@@ -2,19 +2,22 @@
 
 @section('title', 'Login to quotes website')
 @section('content')
-    <h1>Login Form</h1>
-    <form action="{{ route('login.submit') }}" method="POST">
+    @include('partials.page-header', [
+        'pageTitle' => 'Login Form',
+        'pageDesc' => 'You can log in to the website here',
+    ])
+    <form class="form" action="{{ route('login.submit') }}" method="POST">
         @csrf
-        <div>
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" value="{{ old('email') }}" />
+        <div class="form-group">
+            <label class="label" for="email">Email</label>
+            <input class="input" type="email" id="email" name="email" value="{{ old('email') }}" />
         </div>
-        <div>
-            <label for="password">Password</label>
-            <input id="password" name="password" value="{{ old('password') }}" />
+        <div class="form-group">
+            <label class="label" for="password">Password</label>
+            <input type="password" class="input" id="password" name="password" value="{{ old('password') }}" />
         </div>
-        <div>
-            <button type="submit">Login to website</button>
+        <div class="form-group">
+            <button class="button button-submit" type="submit">Login to website</button>
         </div>
 
     </form>
