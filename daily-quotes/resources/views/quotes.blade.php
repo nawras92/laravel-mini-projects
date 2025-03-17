@@ -17,8 +17,10 @@
                         <div class="card-actions">
                             <a class="button button-view" href="/quotes/{{ $quote->id }}">View</a>
                             @auth
-                                <a class="button button-edit" href="/quotes/{{ $quote['id'] }}/edit">Edit</a>
-                                @include('delete')
+                                @if (Auth::id() === $quote->user_id)
+                                    <a class="button button-edit" href="/quotes/{{ $quote['id'] }}/edit">Edit</a>
+                                    @include('delete')
+                                @endif
                             @endauth
                         </div>
                     </div>

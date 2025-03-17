@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Quotes;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class QuotesController extends Controller
 {
@@ -58,22 +59,20 @@ class QuotesController extends Controller
     $request->validate(
       [
         'quote-text' => 'required|string|max:500',
-        'quote-author' => 'required|string|max:150',
       ],
       [
         'quote-text.required' =>
           'The quote text is required and cannot be empty.',
         'quote-text.string' => 'The quote text must be a valid string',
         'quote-text.max' => 'The quote text cannot be longer than 500 chars.',
-        'quote-author.max' =>
-          'The quote author cannot be longer than 150 chars.',
       ],
     );
 
     //insert into
     Quotes::create([
       'quote' => $request->input('quote-text'),
-      'author' => $request->input('quote-author'),
+      'author' => Auth::user()->name,
+      'user_id' => Auth::id(),
     ]);
 
     return redirect()
@@ -92,22 +91,6 @@ class QuotesController extends Controller
   // Update process
   public function update(Request $request, $quoteId)
   {
-    /* dd($request->input('quote-text'), $request->input('quote-author')); */
-    $validated = $request->validate(
-      [
-        'quote-text' => 'required|string|max:500',
-        'quote-author' => 'required|string|max:150',
-      ],
-      [
-        'quote-text.required' =>
-          'The quote text is required and cannot be empty.',
-        'quote-text.string' => 'The quote text must be a valid string',
-        'quote-text.max' => 'The quote text cannot be longer than 500 chars.',
-        'quote-author.max' =>
-          'The quote author cannot be longer than 150 chars.',
-      ],
-    );
-
     // Find Quote
     /* $quoteId = 500; */
     $quote = Quotes::find($quoteId);
@@ -117,8 +100,23 @@ class QuotesController extends Controller
         ->withErrors(['quote_id' => 'Quote not found']);
     }
 
+    if (Auth::id() !== $quote->user_id) {
+      abort(403, 'You can not edit a quote you have not written');
+    }
+    /* dd($request->input('quote-text'), $request->input('quote-author')); */
+    $validated = $request->validate(
+      [
+        'quote-text' => 'required|string|max:500',
+      ],
+      [
+        'quote-text.required' =>
+          'The quote text is required and cannot be empty.',
+        'quote-text.string' => 'The quote text must be a valid string',
+        'quote-text.max' => 'The quote text cannot be longer than 500 chars.',
+      ],
+    );
+
     $quote->quote = $validated['quote-text'];
-    $quote->author = $validated['quote-author'];
     $quote->save();
 
     return redirect()
@@ -133,6 +131,9 @@ class QuotesController extends Controller
       return redirect()
         ->back()
         ->withErrors(['quote_id' => 'Quote not found']);
+    }
+    if (Auth::id() !== $quote->user_id) {
+      abort(403, 'You can not delete a quote you have not written');
     }
 
     $quote->delete();

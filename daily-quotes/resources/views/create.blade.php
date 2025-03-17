@@ -13,10 +13,10 @@
             <label class="label" for="quote-text">Quote Text</label>
             <textarea class="textarea" id="quote-text" name="quote-text" cols="30" rows="10">{{ old('quote-text') }}</textarea>
         </div>
-        <div class="form-group">
-            <label class="label" for="quote-author">Quote Author</label>
-            <input class="input" id="quote-author" name="quote-author" value="{{ old('quote-author') }}" />
-        </div>
+        {{-- <div class="form-group"> --}}
+        {{--     <label class="label" for="quote-author">Quote Author</label> --}}
+        {{--     <input class="input" id="quote-author" name="quote-author" value="{{ old('quote-author') }}" /> --}}
+        {{-- </div> --}}
         <div class="form-group">
             <button class="button button-submit" type="submit">Add Quote</button>
         </div>
